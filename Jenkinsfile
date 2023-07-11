@@ -1,14 +1,14 @@
 pipeline{
     tools{
-        jdk 'myjava'
-        maven 'mymaven'
+        jdk 'Halijava'
+        maven 'Halimaven'
     }
 	agent any
       stages{
            stage('Checkout'){
               steps{
 		 echo 'cloning..'
-                 git 'https://github.com/theitern/DevopsBasics.git'
+                 git 'https://github.com/Halimat9860/Hali_DevopsBasics.git'
               }
           }
           stage('Compile'){
@@ -24,17 +24,17 @@ pipeline{
                   sh 'mvn pmd:pmd'
               }
           }
-        //    stage('UnitTest'){
-        //       steps{
-	    //      echo 'Testing'
-        //           sh 'mvn test'
-        //       }
-        //        post {
-        //        success {
-        //            junit 'target/surefire-reports/*.xml'
-        //        }
-        //    }	
-        //   }
+           stage('UnitTest'){
+              steps{
+	         echo 'Testing'
+                  sh 'mvn test'
+              }
+               post {
+               success {
+                   junit 'target/surefire-reports/*.xml'
+               }
+           }	
+          }
           stage('Package'){
               steps{
                   sh 'mvn package'
